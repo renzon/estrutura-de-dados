@@ -74,7 +74,7 @@ class ListaTestes(unittest.TestCase):
         lista = Lista()
         lista.adicionar(0)
         lista.adicionar(1)
-        lista.adicionar(3)
+        lista.adicionar(2)
         self.assertEqual(3, lista.tam)
         primeiro = lista.primeiro
         self.assertEqual(0, primeiro.valor)
@@ -82,6 +82,51 @@ class ListaTestes(unittest.TestCase):
         segundo = primeiro.direito
         self.assertEqual(1, segundo.valor)
         self.assertEqual(2, ultimo.valor)
+
+        self.assertEqual(primeiro, segundo.esquerdo)
+
+        self.assertEqual(segundo, ultimo.esquerdo)
+        self.assertEqual(ultimo, segundo.direito)
+
+        self.assertIsNone(primeiro.esquerdo)
+        self.assertIsNone(ultimo.direito)
+
+    def test_adicionar_primeiro_a_esquerda(self):
+        lista = Lista()
+        lista.adicionar_a_esquerda(0)
+        self.assertEqual(1, lista.tam)
+        primeiro = lista.primeiro
+        self.assertEqual(0, primeiro.valor)
+        self.assertEqual(primeiro, lista.ultimo)
+        self.assertIsNone(primeiro.esquerdo)
+        self.assertIsNone(primeiro.direito)
+
+    def test_adicionar_segundo_a_esquerda(self):
+        lista = Lista()
+        lista.adicionar_a_esquerda(0)
+        lista.adicionar_a_esquerda(1)
+        self.assertEqual(2, lista.tam)
+        primeiro = lista.primeiro
+        self.assertEqual(1, primeiro.valor)
+        ultimo = lista.ultimo
+        self.assertEqual(0, ultimo.valor)
+        self.assertEqual(primeiro, ultimo.esquerdo)
+        self.assertEqual(ultimo, primeiro.direito)
+        self.assertIsNone(primeiro.esquerdo)
+        self.assertIsNone(ultimo.direito)
+
+    def test_adicionar_terceiro(self):
+        lista = Lista()
+        lista.adicionar_a_esquerda(0)
+        lista.adicionar_a_esquerda(1)
+        lista.adicionar_a_esquerda(2)
+        self.assertEqual(3, lista.tam)
+        primeiro = lista.primeiro
+        self.assertEqual(2, primeiro.valor)
+        ultimo = lista.ultimo
+        segundo = primeiro.direito
+        self.assertEqual(1, segundo.valor)
+        self.assertEqual(0, ultimo.valor)
 
         self.assertEqual(primeiro, segundo.esquerdo)
 
