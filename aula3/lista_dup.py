@@ -39,5 +39,52 @@ class NohTestes(unittest.TestCase):
         self.assertEqual(direito, noh.direito)
 
 
+class ListaTestes(unittest.TestCase):
+    def test_init(self):
+        lista = Lista()
+        self.assertEquals(0, lista.tam)
+        self.assertIsNone(lista.primeiro)
+        self.assertIsNone(lista.ultimo)
+
+    def test_adicionar(self):
+        lista = Lista()
+        lista.adicionar(0)
+        self.assertEqual(1, lista.tam)
+        primeiro = lista.primeiro
+        self.assertEqual(0, primeiro.valor)
+        self.assertEqual(primeiro, lista.ultimo)
+        self.assertIsNone(primeiro.esquerdo)
+        self.assertIsNone(primeiro.direito)
+
+        lista.adicionar(1)
+        self.assertEqual(2, lista.tam)
+        primeiro_2 = lista.primeiro
+        self.assertEqual(primeiro, primeiro_2)
+        ultimo = lista.ultimo
+        self.assertEqual(1, ultimo.valor)
+        self.assertEqual(primeiro, ultimo.esquerdo)
+        self.assertEqual(ultimo, primeiro.direito)
+        self.assertIsNone(primeiro.esquerdo)
+        self.assertIsNone(ultimo.direito)
+
+        segundo = ultimo
+        lista.adicionar(2)
+        self.assertEqual(3, lista.tam)
+        primeiro_3 = lista.primeiro
+        self.assertEqual(primeiro, primeiro_3)
+        ultimo = lista.ultimo
+        self.assertNotEqual(segundo, ultimo)
+        self.assertEqual(2, ultimo.valor)
+
+        self.assertEqual(primeiro, segundo.esquerdo)
+        self.assertEqual(segundo, primeiro.direito)
+
+        self.assertEqual(segundo, ultimo.esquerdo)
+        self.assertEqual(ultimo, segundo.direito)
+
+        self.assertIsNone(primeiro.esquerdo)
+        self.assertIsNone(ultimo.direito)
+
+
 if __name__ == '__main__':
     unittest.main()
