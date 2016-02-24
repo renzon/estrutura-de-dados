@@ -1,4 +1,5 @@
-import unittest
+class ListaVaziaExcecao(Exception):
+    pass
 
 
 class Noh():
@@ -7,6 +8,9 @@ class Noh():
 
 class Lista():
     pass
+
+
+import unittest
 
 
 class NohTestes(unittest.TestCase):
@@ -133,6 +137,46 @@ class ListaTestes(unittest.TestCase):
         self.assertEqual(segundo, ultimo.esquerdo)
         self.assertEqual(ultimo, segundo.direito)
 
+        self.assertIsNone(primeiro.esquerdo)
+        self.assertIsNone(ultimo.direito)
+
+    def test_remover_lista_vazia(self):
+        lista = Lista()
+        self.assertRaises(ListaVaziaExcecao, lista.remover)
+
+    def test_remover_lista_1_elemento(self):
+        lista = Lista()
+        lista.adicionar(0)
+        self.assertEqual(0, lista.remover())
+        self.assertEqual(0, lista.tam)
+        self.assertIsNone(lista.primeiro)
+        self.assertIsNone(lista.ultimo)
+
+    def test_remover_lista_2_elementos(self):
+        lista = Lista()
+        lista.adicionar(0)
+        lista.adicionar(1)
+        self.assertEqual(1, lista.remover())
+        self.assertEqual(1, lista.tam)
+        primeiro = lista.primeiro
+        self.assertEqual(primeiro, lista.ultimo)
+        self.assertEqual(0, primeiro.valor)
+        self.assertIsNone(primeiro.direito)
+        self.assertIsNone(primeiro.esquerdo)
+
+    def test_remover_lista_3_elementos(self):
+        lista = Lista()
+        lista.adicionar(0)
+        lista.adicionar(1)
+        lista.adicionar(2)
+        self.assertEqual(2, lista.remover())
+        self.assertEqual(1, lista.tam)
+        primeiro = lista.primeiro
+        ultimo = lista.ultimo
+        self.assertEqual(ultimo, primeiro.direito)
+        self.assertEqual(primeiro, ultimo.esquerdo)
+        self.assertEqual(0, primeiro.valor)
+        self.assertEqual(1, ultimo.valor)
         self.assertIsNone(primeiro.esquerdo)
         self.assertIsNone(ultimo.direito)
 
