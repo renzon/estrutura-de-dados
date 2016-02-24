@@ -220,6 +220,26 @@ class ListaTestes(unittest.TestCase):
         self.assertIsNone(primeiro.esquerdo)
         self.assertIsNone(ultimo.direito)
 
+    def test_iterar_lista_vazia(self):
+        lista = Lista()
+        lista.iterar(self.fail)
+
+    def test_iterar_lista_nao_vazia(self):
+        lista = Lista()
+        numeros = list(range(3))
+        for n in numeros:
+            lista.adicionar(n)
+
+        contador = 0
+
+        def f(valor):
+            nonlocal contador
+            self.assertEqual(contador, valor)
+            contador += 1
+
+        lista.iterar(f)
+        self.assertEqual(3, contador)
+
 
 if __name__ == '__main__':
     unittest.main()
