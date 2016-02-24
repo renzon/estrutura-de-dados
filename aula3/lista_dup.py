@@ -170,13 +170,53 @@ class ListaTestes(unittest.TestCase):
         lista.adicionar(1)
         lista.adicionar(2)
         self.assertEqual(2, lista.remover())
-        self.assertEqual(1, lista.tam)
+        self.assertEqual(2, lista.tam)
         primeiro = lista.primeiro
         ultimo = lista.ultimo
         self.assertEqual(ultimo, primeiro.direito)
         self.assertEqual(primeiro, ultimo.esquerdo)
         self.assertEqual(0, primeiro.valor)
         self.assertEqual(1, ultimo.valor)
+        self.assertIsNone(primeiro.esquerdo)
+        self.assertIsNone(ultimo.direito)
+
+    def test_remover_a_esquerda_lista_vazia(self):
+        lista = Lista()
+        self.assertRaises(ListaVaziaExcecao, lista.remover_a_esquerda)
+
+    def test_remover_a_esquerda_lista_1_elemento(self):
+        lista = Lista()
+        lista.adicionar(0)
+        self.assertEqual(0, lista.remover_a_esquerda())
+        self.assertEqual(0, lista.tam)
+        self.assertIsNone(lista.primeiro)
+        self.assertIsNone(lista.ultimo)
+
+    def test_remover_a_esquerda_lista_2_elementos(self):
+        lista = Lista()
+        lista.adicionar(0)
+        lista.adicionar(1)
+        self.assertEqual(0, lista.remover_a_esquerda())
+        self.assertEqual(1, lista.tam)
+        primeiro = lista.primeiro
+        self.assertEqual(primeiro, lista.ultimo)
+        self.assertEqual(1, primeiro.valor)
+        self.assertIsNone(primeiro.direito)
+        self.assertIsNone(primeiro.esquerdo)
+
+    def test_remover_a_esquerda_lista_3_elementos(self):
+        lista = Lista()
+        lista.adicionar(0)
+        lista.adicionar(1)
+        lista.adicionar(2)
+        self.assertEqual(0, lista.remover_a_esquerda())
+        self.assertEqual(2, lista.tam)
+        primeiro = lista.primeiro
+        ultimo = lista.ultimo
+        self.assertEqual(ultimo, primeiro.direito)
+        self.assertEqual(primeiro, ultimo.esquerdo)
+        self.assertEqual(1, primeiro.valor)
+        self.assertEqual(2, ultimo.valor)
         self.assertIsNone(primeiro.esquerdo)
         self.assertIsNone(ultimo.direito)
 
