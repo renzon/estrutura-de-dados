@@ -25,7 +25,7 @@ class MinMaxTestes(unittest.TestCase):
         self.assertTupleEqual((1, 1), min_max([1]))
 
     def test_lista_consecutivos(self):
-        self.assertTupleEqual((0, 500), min_max([range(501)]))
+        self.assertTupleEqual((0, 500), min_max(list(range(501))))
 
 
 if __name__ == '__main__':
