@@ -1,4 +1,4 @@
-class ListaVazAlteiaErro(Exception):
+class ListaVaziaErro(Exception):
     pass
 
 
