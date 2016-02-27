@@ -1,4 +1,4 @@
-class ListaVaziaExcecao(Exception):
+class ListaVazAlteiaErro(Exception):
     pass
 
 
@@ -142,7 +142,7 @@ class ListaTestes(unittest.TestCase):
 
     def test_remover_lista_vazia(self):
         lista = Lista()
-        self.assertRaises(ListaVaziaExcecao, lista.remover)
+        self.assertRaises(ListaVaziaErro, lista.remover)
 
     def test_remover_lista_1_elemento(self):
         lista = Lista()
@@ -182,7 +182,7 @@ class ListaTestes(unittest.TestCase):
 
     def test_remover_a_esquerda_lista_vazia(self):
         lista = Lista()
-        self.assertRaises(ListaVaziaExcecao, lista.remover_a_esquerda)
+        self.assertRaises(ListaVaziaErro, lista.remover_a_esquerda)
 
     def test_remover_a_esquerda_lista_1_elemento(self):
         lista = Lista()
