@@ -222,7 +222,8 @@ class ListaTestes(unittest.TestCase):
 
     def test_iterar_lista_vazia(self):
         lista = Lista()
-        lista.iterar(self.fail)
+        for i in lista:
+            self.fail('Não deveria executar nada')
 
     def test_iterar_lista_nao_vazia(self):
         lista = Lista()
@@ -230,15 +231,8 @@ class ListaTestes(unittest.TestCase):
         for n in numeros:
             lista.adicionar(n)
 
-        contador = 0
-
-        def f(valor):
-            nonlocal contador
-            self.assertEqual(contador, valor)
-            contador += 1
-
-        lista.iterar(f)
-        self.assertEqual(3, contador)
+        for i, elemento_da_lista in zip(range(3), lista):
+            self.assertEqual(i, elemento_da_lista)
 
 
 if __name__ == '__main__':
