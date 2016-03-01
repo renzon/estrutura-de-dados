@@ -14,7 +14,7 @@ def min_max(seq):
     mínimo da sequencia seq.
     O segundo é o valor máximo (max) da sequencia
     '''
-    pass
+    return None, None
 
 
 class MinMaxTestes(unittest.TestCase):
