@@ -3,12 +3,12 @@ import unittest
 
 def esta_balanceada(expressao):
     """
-    Função que diz se expressão possui parenteses, colchetes e chaves balanceados
+    Função que calcula se expressão possui parenteses, colchetes e chaves balanceados
 
     O Aluno deverá informar a complexidade de tempo e espaço da função
 
     :param expressao: string com expressao a ser balanceada
-    :return:
+    :return: boleano verdadeiro se expressao está balanceada e falso caso contrário
     """
 
 
