@@ -1,6 +1,17 @@
 import unittest
 
 
+def esta_balanceada(expressao):
+    """
+    Função que diz se expressão possui parenteses, colchetes e chaves balanceados
+
+    O Aluno deverá informar a complexidade de tempo e espaço da função
+
+    :param expressao: string com expressao a ser balanceada
+    :return:
+    """
+
+
 class BalancearTestes(unittest.TestCase):
     def test_expressao_vazia(self):
         self.assertTrue(esta_balanceada(''))
@@ -29,13 +40,13 @@ class BalancearTestes(unittest.TestCase):
         self.assertFalse(esta_balanceada('('))
 
     def test_chave_nao_aberta(self):
-        self.assertFalse(esta_balanceada('}'))
+        self.assertFalse(esta_balanceada('}{'))
 
     def test_colchete_nao_aberto(self):
-        self.assertFalse(esta_balanceada(']'))
+        self.assertFalse(esta_balanceada(']['))
 
     def test_parentese_nao_aberto(self):
-        self.assertFalse(esta_balanceada(']'))
+        self.assertFalse(esta_balanceada(')('))
 
     def test_falta_de_caracter_de_fechamento(self):
         self.assertFalse(esta_balanceada('({[]}'))
