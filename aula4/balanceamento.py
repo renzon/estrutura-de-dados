@@ -7,6 +7,8 @@ def esta_balanceada(expressao):
 
     O Aluno deverá informar a complexidade de tempo e espaço da função
 
+    Deverá ser usada como estrutura de dados apenas a pilha feita na aula anterior
+
     :param expressao: string com expressao a ser balanceada
     :return: boleano verdadeiro se expressao está balanceada e falso caso contrário
     """
