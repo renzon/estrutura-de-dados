@@ -12,6 +12,7 @@ def esta_balanceada(expressao):
     :param expressao: string com expressao a ser balanceada
     :return: boleano verdadeiro se expressao está balanceada e falso caso contrário
     """
+    pass
 
 
 class BalancearTestes(unittest.TestCase):

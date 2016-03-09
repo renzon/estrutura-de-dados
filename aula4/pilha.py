@@ -1,4 +1,32 @@
 import unittest
+from collections import deque
+
+
+class Pilha():
+    def __init__(self):
+        self._lista = deque()
+
+    def vazia(self):
+        return not bool(self._lista)
+
+    def topo(self):
+        if self._lista:
+            return self._lista[-1]
+
+        raise PilhaVaziaErro()
+
+    def empilhar(self, valor):
+        self._lista.append(valor)
+
+    def desempilhar(self):
+        try:
+            return self._lista.pop()
+        except IndexError:
+            raise PilhaVaziaErro()
+
+
+class PilhaVaziaErro(Exception):
+    pass
 
 
 class PilhaTestes(unittest.TestCase):
