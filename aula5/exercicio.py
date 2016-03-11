@@ -18,7 +18,8 @@ def analise_lexica(expressao):
     :param expressao: string com expressao a ser analisada
     :return: fila com tokens
     """
-    pass
+    fila=Fila()
+    allowed = set('+-?*.(){}[]1234567890')
 
 
 def analise_sintatica(fila):

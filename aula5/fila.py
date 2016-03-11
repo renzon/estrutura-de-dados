@@ -1,7 +1,31 @@
 import unittest
+from collections import deque
 
 
 class Fila():
+    def __init__(self):
+        self._deque = deque()
+
+    def enfileirar(self, valor):
+        return self._deque.append(valor)
+
+    def vazia(self):
+        return len(self._deque) == 0
+
+    def primeiro(self):
+        try:
+            return self._deque[0]
+        except IndexError:
+            raise FilaVaziaErro
+
+    def desenfileirar(self):
+        try:
+            return self._deque.popleft()
+        except IndexError:
+            raise FilaVaziaErro
+
+
+class FilaVaziaErro(Exception):
     pass
 
 
