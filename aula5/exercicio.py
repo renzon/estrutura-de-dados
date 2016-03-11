@@ -18,6 +18,10 @@ import unittest
 
 
 class AnaliseLexicaTestes(unittest.TestCase):
+    def test_expressao_vazia(self):
+        fila = analise_lexica('')
+        self.assertTrue(fila.vazia())
+
     def test_caracter_estranho(self):
         self.assertRaises(ErroLexico, analise_lexica, 'a')
         self.assertRaises(ErroLexico, analise_lexica, 'ab')
