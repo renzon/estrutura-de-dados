@@ -32,6 +32,15 @@ def analise_sintatica(fila):
     pass
 
 
+def avaliar(expressao):
+    """
+    Função que avalia expressão aritmetica retornando se valor se não houver nenhum erro
+    :param expressao: string com expressão aritmética
+    :return: valor númerico com resultado
+    """
+    pass
+
+
 import unittest
 
 
@@ -201,6 +210,29 @@ class AnaliseSintaticaTestes(unittest.TestCase):
         self.assertEqual('{', pilha.pop())
         self.assertEqual('/', pilha.pop())
         self.assertEqual(1, pilha.pop())
+
+
+class AvaliacaoTestes(unittest.TestCase):
+    def test_expressao_vazia(self):
+        self.assertRaises(ErroSintatico, avaliar, '')
+
+    def test_inteiro(self):
+        self.assert_avaliacao('1')
+
+    def test_float(self):
+        self.assert_avaliacao('2.1')
+
+    def test_soma(self):
+        self.assert_avaliacao('2+1')
+
+    def test_subtracao_e_parenteses(self):
+        self.assert_avaliacao('(2-1)')
+
+    def test_expressao_com_todos_elementos(self):
+        self.assertEqual(1.0, '2.0/[4*3+1-{15-(1+3)}]')
+
+    def assert_avaliacao(self, expressao):
+        self.assertEqual(eval(expressao), avaliar(expressao))
 
 
 if __name__ == '__main__':
