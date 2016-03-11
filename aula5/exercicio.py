@@ -19,7 +19,24 @@ def analise_lexica(expressao):
     :return: fila com tokens
     """
     fila=Fila()
-    allowed = set('+-?*.(){}[]1234567890')
+    allowed = set(r'+-/*.(){}[]1234567890')
+    single = set(r'+-/*(){}[].')
+    current=[]
+
+    for c in expressao:
+        if c not in allowed:
+            raise ErroLexico()
+        if c in single:
+            if current:
+                fila.enfileirar(''.join(current))
+                current=[]
+            fila.enfileirar(c)
+        else:
+            current.append(c)
+    if current:
+        fila.enfileirar(''.join(current))
+    return fila
+
 
 
 def analise_sintatica(fila):
@@ -110,7 +127,7 @@ class AnaliseLexicaTestes(unittest.TestCase):
         self.assertTrue(fila.vazia())
 
     def test_subtracao(self):
-        fila = analise_lexica('1+2.0')
+        fila = analise_lexica('1-2.0')
         self.assertEqual('1', fila.desenfileirar())
         self.assertEqual('-', fila.desenfileirar())
         self.assertEqual('2', fila.desenfileirar())
@@ -120,9 +137,11 @@ class AnaliseLexicaTestes(unittest.TestCase):
 
     def test_multiplicacao(self):
         fila = analise_lexica('1*2.0')
-        self.assertEqual(1, fila.desenfileirar())
+        self.assertEqual('1', fila.desenfileirar())
         self.assertEqual('*', fila.desenfileirar())
-        self.assertEqual(2.0, fila.desenfileirar())
+        self.assertEqual('2', fila.desenfileirar())
+        self.assertEqual('.', fila.desenfileirar())
+        self.assertEqual('0', fila.desenfileirar())
         self.assertTrue(fila.vazia())
 
     def test_divisao(self):
