@@ -1,4 +1,11 @@
+from aula5.fila import Fila
+
+
 class ErroLexico(Exception):
+    pass
+
+
+class ErroSintatico(Exception):
     pass
 
 
@@ -10,6 +17,17 @@ def analise_lexica(expressao):
     e verificar se demais caracteres são validos: +-*/(){}[]
     :param expressao: string com expressao a ser analisada
     :return: fila com tokens
+    """
+    pass
+
+
+def analise_sintatica(fila):
+    """
+    Função que realiza analise sintática de tokens produzidos por analise léxica.
+    Executa validações sintáticas e se não houver erro retorn pilha para avaliacao
+
+    :param fila: fila proveniente de análise lexica
+    :return: pilha com elementos tokens de numeros
     """
     pass
 
@@ -128,3 +146,62 @@ class AnaliseLexicaTestes(unittest.TestCase):
         self.assertEqual(']', fila.desenfileirar())
         self.assertEqual('}', fila.desenfileirar())
         self.assertTrue(fila.vazia())
+
+
+class AnaliseSintaticaTestes(unittest.TestCase):
+    def test_fila_vazia(self):
+        fila = Fila()
+        self.assertRaises(ErroSintatico, analise_sintatica, fila)
+
+    def test_int(self):
+        fila = Fila()
+        fila.enfileirar('1234567890')
+        pilha = analise_sintatica(fila)
+        self.assertEqual(1234567890, pilha.desempilhar())
+        self.assertTrue(pilha.vazia())
+
+    def test_float(self):
+        fila = Fila()
+        fila.enfileirar('1234567890')
+        fila.enfileirar('.')
+        fila.enfileirar('4')
+        pilha = analise_sintatica(fila)
+        self.assertEqual(1234567890.4, pilha.desempilhar())
+        self.assertTrue(pilha.vazia())
+
+    def test_erro_float_com_2_pontos(self):
+        fila = Fila()
+        fila.enfileirar('1234567890')
+        fila.enfileirar('.')
+        fila.enfileirar('4')
+        fila.enfileirar('.')
+        fila.enfileirar('5')
+        self.assertRaises(ErroSintatico, analise_sintatica, fila)
+
+    def test_erro_2_sinais(self):
+        fila = analise_sintatica('1+-2')
+        self.assertRaises(ErroSintatico, analise_sintatica, fila)
+
+    def test_expressao_com_todos_elementos(self):
+        fila = analise_lexica('1/{2.0+3*[7-(5-3)]}')
+        pilha = analise_sintatica(fila)
+        self.assertEqual('}', pilha.pop())
+        self.assertEqual(']', pilha.pop())
+        self.assertEqual(')', pilha.pop())
+        self.assertEqual(3, pilha.pop())
+        self.assertEqual('-', pilha.pop())
+        self.assertEqual(5, pilha.pop())
+        self.assertEqual('-', pilha.pop())
+        self.assertEqual(7, pilha.pop())
+        self.assertEqual('[', pilha.pop())
+        self.assertEqual('*', pilha.pop())
+        self.assertEqual(3, pilha.pop())
+        self.assertEqual('+', pilha.pop())
+        self.assertEqual(2.0, pilha.pop())
+        self.assertEqual('{', pilha.pop())
+        self.assertEqual('/', pilha.pop())
+        self.assertEqual(1, pilha.pop())
+
+
+if __name__ == '__main__':
+    unittest.main()

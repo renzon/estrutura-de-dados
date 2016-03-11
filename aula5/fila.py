@@ -1,6 +1,10 @@
 import unittest
 
 
+class Fila():
+    pass
+
+
 class FilaTestes(unittest.TestCase):
     def test_primeiro_fila_vazia(self):
         fila = Fila()
