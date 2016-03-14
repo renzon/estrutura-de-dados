@@ -1,6 +1,8 @@
-import operator
+# Exercício de avaliação de expressão aritmética.
+# Só podem ser usadas as estruturas Pilha e Fila implementadas em aulas anteriores.
+# Deve ser análise de tempo e espaço para função avaliação
 
-from aula4.pilha import Pilha
+
 from aula5.fila import Fila
 
 
@@ -21,24 +23,7 @@ def analise_lexica(expressao):
     :param expressao: string com expressao a ser analisada
     :return: fila com tokens
     """
-    fila = Fila()
-    allowed = set(r'+-/*.(){}[]1234567890')
-    single = set(r'+-/*(){}[].')
-    current = []
-
-    for c in expressao:
-        if c not in allowed:
-            raise ErroLexico()
-        if c in single:
-            if current:
-                fila.enfileirar(''.join(current))
-                current = []
-            fila.enfileirar(c)
-        else:
-            current.append(c)
-    if current:
-        fila.enfileirar(''.join(current))
-    return fila
+    pass
 
 
 def analise_sintatica(fila):
@@ -49,31 +34,7 @@ def analise_sintatica(fila):
     :param fila: fila proveniente de análise lexica
     :return: fila_sintatica com elementos tokens de numeros
     """
-    if fila.vazia():
-        raise ErroSintatico()
-    tokens = Fila()
-    previous = Fila()
-    for t in fila:
-        try:
-            int(t)
-        except ValueError:
-            if t == '.':
-                previous.enfileirar(t)
-            else:
-                _solve_number(previous, tokens)
-                tokens.enfileirar(t)
-        else:
-            previous.enfileirar(t)
-
-    _solve_number(previous, tokens)
-    return tokens
-
-
-def _solve_number(previous, tokens):
-    if len(previous) == 1:
-        tokens.enfileirar(int(previous.desenfileirar()))
-    elif len(previous) == 3:
-        tokens.enfileirar(float(''.join(previous)))
+    pass
 
 
 def avaliar(expressao):
@@ -82,31 +43,7 @@ def avaliar(expressao):
     :param expressao: string com expressão aritmética
     :return: valor númerico com resultado
     """
-    tokens = analise_sintatica(analise_lexica(expressao))
-    ops = dict(zip('+-*/', (operator.add, operator.sub, operator.mul, operator.truediv)))
-    group_map = dict(zip('({[', ')}]'))
-    pilha = Pilha()
-    for t in tokens:
-        if t in group_map.values():
-            n = pilha.desempilhar()
-            pilha.desempilhar()
-            pilha.empilhar(n)
-        else:
-            pilha.empilhar(t)
-        while len(pilha) >= 3:
-            n = pilha.desempilhar()
-            op = pilha.desempilhar()
-            n2 = pilha.desempilhar()
-            try:
-                r = ops[op](n2, n)
-            except:
-                pilha.empilhar(n2)
-                pilha.empilhar(op)
-                pilha.empilhar(n)
-                break
-            else:
-                pilha.empilhar(r)
-    return pilha.desempilhar()
+    pass
 
 
 import unittest
