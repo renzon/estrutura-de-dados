@@ -26,13 +26,13 @@ class Fila():
         try:
             return self._deque[0]
         except IndexError:
-            raise FilaVaziaErro
+            raise FilaVaziaErro('Não é possível obter primeiro de lista vazia')
 
     def desenfileirar(self):
         try:
             return self._deque.popleft()
         except IndexError:
-            raise FilaVaziaErro
+            raise FilaVaziaErro('Não é possível desenfileirar lista vazia')
 
 
 class FilaVaziaErro(Exception):
