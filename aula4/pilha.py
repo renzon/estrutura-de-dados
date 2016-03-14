@@ -6,6 +6,9 @@ class Pilha():
     def __init__(self):
         self._lista = deque()
 
+    def __len__(self):
+        return len(self._lista)
+
     def vazia(self):
         return not bool(self._lista)
 
