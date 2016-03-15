@@ -1,5 +1,16 @@
 import unittest
 
+## Código para adicionar path do projeto
+import sys
+from os import path
+
+file_path = path.abspath(__file__)
+projeto_path = path.join(file_path, '..', '..')
+projeto_path = path.abspath(projeto_path)
+sys.path.append(projeto_path)
+
+
+## Fim
 
 def esta_balanceada(expressao):
     """
