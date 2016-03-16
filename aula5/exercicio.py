@@ -1,6 +1,6 @@
 # Exercício de avaliação de expressão aritmética.
 # Só podem ser usadas as estruturas Pilha e Fila implementadas em aulas anteriores.
-# Deve ser análise de tempo e espaço para função avaliação
+# Deve ter análise de tempo e espaço para função avaliação
 
 
 from aula5.fila import Fila
