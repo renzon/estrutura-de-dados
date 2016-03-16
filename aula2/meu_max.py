@@ -9,9 +9,11 @@ def max(seq):
     return possivel_max
 
 
+
 for i in range(1, 7):
     lista = range(10 ** i)
     inicio = time.time()
     print(max(lista))
     tempo_execucao = time.time() - inicio
     print(len(lista), tempo_execucao)
+
