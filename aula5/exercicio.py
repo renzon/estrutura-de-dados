@@ -177,7 +177,7 @@ class AnaliseSintaticaTestes(unittest.TestCase):
 
 class AvaliacaoTestes(unittest.TestCase):
     def test_expressao_vazia(self):
-        self.assertRaises(ErroSintatico, avaliar, '')
+        self.assertRaises(ErroSintatico, avaliar(''))
 
     def test_inteiro(self):
         self.assert_avaliacao('1')
