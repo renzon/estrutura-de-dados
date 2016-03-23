@@ -2,11 +2,11 @@ import unittest
 
 
 def selection_sort(seq):
-    inicio = 0
-    final = len(seq)
-    while inicio < final:
-        (seq[i] for i in range(inicio, final))
-        inicio += 1
+    n = len(seq)
+    for i_corrente in range(n):
+        _, i_min = min((seq[i], i) for i in range(i_corrente, n))
+        seq[i_corrente], seq[i_min] = seq[i_min], seq[i_corrente]  # swap
+    return seq
 
 
 class OrdenacaoTestes(unittest.TestCase):
