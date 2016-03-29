@@ -2,11 +2,29 @@ import unittest
 
 
 def _merge(seq_esquerda, seq_direita):
-    pass
+    n_esquerda = len(seq_esquerda)
+    n_direita = len(seq_direita)
+    lista_mesclada = [0] * (n_direita + n_esquerda)
+    i_esquerda = i_direita = 0
+    while i_direita + i_esquerda < len(lista_mesclada):
+        if i_esquerda < n_esquerda and (i_direita == n_direita or seq_esquerda[i_esquerda] < seq_direita[i_direita]):
+            lista_mesclada[i_esquerda + i_direita] = seq_esquerda[i_esquerda]
+            i_esquerda += 1
+        else:
+            lista_mesclada[i_esquerda + i_direita] = seq_direita[i_direita]
+            i_direita += 1
+
+    return lista_mesclada
 
 
 def merge_sort(seq):
-    pass
+    n = len(seq)
+    if n <= 1:
+        return seq
+    metade = n // 2
+    esquerda = merge_sort(seq[:metade])
+    direita = merge_sort(seq[metade:])
+    return _merge(esquerda, direita)
 
 
 class MergeTestes(unittest.TestCase):
@@ -14,9 +32,6 @@ class MergeTestes(unittest.TestCase):
         self.assertListEqual([], _merge([], []))
 
     def test_lista_uma_lista_unitaria(self):
-        self.assertListEqual([1], _merge([1], []))
-
-    def test_listas_unitarias(self):
         self.assertListEqual([1], _merge([1], []))
 
     def test_listas_unitarias(self):
