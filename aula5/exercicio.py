@@ -1,5 +1,9 @@
+# Exercício de avaliação de expressão aritmética.
+# Só podem ser usadas as estruturas Pilha e Fila implementadas em aulas anteriores.
+# Deve ser análise de tempo e espaço para função avaliação
+
+
 from aula5.fila import Fila
-from aula4.pilha import Pilha
 
 
 class ErroLexico(Exception):
@@ -18,118 +22,28 @@ def analise_lexica(expressao):
     e verificar se demais caracteres são validos: +-*/(){}[]
     :param expressao: string com expressao a ser analisada
     :return: fila com tokens
-    Complexidade: o(n) em tempo de execução e memória
     """
-    fila = Fila()
-
-    #numeros e tokens
-    dig = R"0123456789.-+*/{}[]()"
-
-    if expressao:
-        aux = ''
-        for i in expressao:
-            if i in dig:
-                if i in '.-+*/{}[]()':
-                    if aux:
-                        fila.enfileirar(aux)
-                        aux = ''
-                    fila.enfileirar(i)
-                else:
-                    aux = aux + i
-            else:
-                raise ErroLexico()
-        if aux:
-            fila.enfileirar(aux)
-    return fila
+    pass
 
 
 def analise_sintatica(fila):
     """
     Função que realiza analise sintática de tokens produzidos por analise léxica.
     Executa validações sintáticas e se não houver erro retorn fila_sintatica para avaliacao
+
     :param fila: fila proveniente de análise lexica
     :return: fila_sintatica com elementos tokens de numeros
-    Complexidade: o(n) em tempo de execução e memória
     """
-    if fila.__len__():
+    pass
 
-     op = '+-*/(){}[]'
-    _fila = Fila()
-    characteres = ''
-    if fila.vazia():
-        raise ErroSintatico('')
-    while not fila.vazia():
-        current = fila.desenfileirar()
-        if current in op:
-            if len(characteres):
-                if '.' not in characteres:
-                    _fila.enfileirar(int(characteres))
-                else: _fila.enfileirar(float(characteres))
-                characteres = ''
-            _fila.enfileirar(current)
-        else: characteres += current
-    if len(characteres):
-        if '.' not in characteres: characteres = int(characteres)
-        else: characteres = float(characteres)
-        _fila.enfileirar(characteres)
-    return _fila
 
 def avaliar(expressao):
     """
     Função que avalia expressão aritmetica retornando se valor se não houver nenhum erro
     :param expressao: string com expressão aritmética
     :return: valor númerico com resultado
-    Complexidade: o(n) em tempo de execução e memória
     """
-    if expressao:
-        fila = analise_sintatica(analise_lexica(expressao))
-        tamanho = len(fila)
-        if tamanho == 1:
-            return fila.primeiro()
-        pilha = Pilha()
-        for n in range(tamanho):
-            pilha.empilhar(fila._deque[n])
-            if pilha.__len__() > 2 and str(pilha.topo()) not in '-+*/(){}[]':
-                valor = pilha.topo()
-                pilha.desempilhar()
-                if pilha.topo() == '+':
-                    pilha.desempilhar()
-                    valor = pilha.desempilhar() + valor
-                elif pilha.topo() == '-':
-                    pilha.desempilhar()
-                    valor = pilha.desempilhar() - valor
-                elif pilha.topo() == '*':
-                    pilha.desempilhar()
-                    valor = pilha.desempilhar() * valor
-                elif pilha.topo() == '/':
-                    pilha.desempilhar()
-                    valor = pilha.desempilhar() / valor
-                pilha.empilhar(valor)
-            elif str(pilha.topo()) in ')}]' and n == tamanho - 1:
-                pilha.desempilhar()
-                while len(pilha) > 1:
-                    if str(pilha.topo()) not in '-+*/(){}[]':
-                        valor = pilha.topo()
-                        pilha.desempilhar()
-                        if pilha.topo() == '+':
-                            pilha.desempilhar()
-                            valor = pilha.desempilhar() + valor
-                        elif pilha.topo() == '-':
-                            pilha.desempilhar()
-                            valor = pilha.desempilhar() - valor
-                        elif pilha.topo() == '*':
-                            pilha.desempilhar()
-                            valor = pilha.desempilhar() * valor
-                        elif pilha.topo() == '/':
-                            pilha.desempilhar()
-                            valor = pilha.desempilhar() / valor
-                        elif str(pilha.topo()) in '(){}[]':
-                            pilha.desempilhar()
-                        pilha.empilhar(valor)
-                    else:
-                        pilha.desempilhar()
-        return pilha.topo()
-    raise ErroSintatico()
+    pass
 
 
 import unittest
