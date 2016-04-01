@@ -1,27 +1,45 @@
 import unittest
 
-seq = [1, 1, 2]
+
+def escolher_pivot_e_posicionar_no_fim(seq, inicio, fim):
+    if inicio < fim:
+        meio = (fim + inicio) // 2
+        candidatos = [(seq[inicio], inicio), (seq[meio], meio), (seq[fim], fim)]
+        candidatos.sort()
+        pivot, indice_pivot = candidatos[1]
+        trocar(seq, indice_pivot, fim)
+        return pivot
 
 
-def _quick_recursivo(seq, inicio, final):
-    if inicio >= final:
-        return seq
-    indice_pivot = final
-    pivot = seq[-1]
-    i_menor = inicio
-    i_maior = final - 1
-
-    # posicionar pivot
-
-    # Resolver para sublista da esquerda
-
-    # Resolver para sublista da direita
-
-    return seq
+def trocar(seq, i, i2):
+    seq[i], seq[i2] = seq[i2], seq[i]
 
 
 def quick_sort(seq):
-    return _quick_recursivo(seq, 0, len(seq) - 1)
+    if not seq:
+        return seq
+    pilha = [(0, len(seq) - 1)]
+    while pilha:
+        inicio, fim = pilha.pop()
+        pivot = escolher_pivot_e_posicionar_no_fim(seq, inicio, fim)
+        esquerda = inicio
+        direita = fim - 1
+
+        while esquerda <= direita:
+            while esquerda <= direita and seq[esquerda] < pivot:
+                esquerda += 1
+            while esquerda <= direita and seq[direita] > pivot:
+                direita -= 1
+            if esquerda <= direita:
+                trocar(seq, esquerda, direita)
+                esquerda += 1
+                direita -= 1
+        trocar(seq, esquerda, fim)
+        if esquerda - 1 > inicio:
+            pilha.append((inicio, esquerda - 1))
+        if esquerda + 1 < fim:
+            pilha.append((esquerda + 1, fim))
+    return seq
 
 
 class OrdenacaoTestes(unittest.TestCase):
