@@ -102,7 +102,7 @@ class ArvoreTestes(TestCase):
         nohs[4].adicionar(nohs[3])
 
         nohs[8].adicionar(nohs[7])
-        nohs[8].adicionar(nohs[7])
+        nohs[8].adicionar(nohs[9])
 
         nohs[7].adicionar(nohs[6])
 
