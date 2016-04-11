@@ -48,6 +48,20 @@ class NohTestes(TestCase):
         self.assertIs(filho2, filho.irmao_direito)
         self.assertIsNone(filho2.irmao_direito)
 
+    def teste_adicionar_tres_filhos(self):
+        pai = Noh(5)
+        filho = Noh(4)
+        filho2 = Noh(3)
+        filho3 = Noh(2)
+        pai.adicionar(filho)
+        pai.adicionar(filho2)
+        pai.adicionar(filho3)
+        self.assertIs(pai, filho.pai)
+        self.assertIs(filho, pai.filho_esquerdo)
+        self.assertIs(filho2, filho.irmao_direito)
+        self.assertIs(filho3, filho2.irmao_direito)
+        self.assertIsNone(filho3.irmao_direito)
+
 
 class ArvoreTestes(TestCase):
     def teste_init(self):
