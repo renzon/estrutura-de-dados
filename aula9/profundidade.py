@@ -74,10 +74,10 @@ class ArvoreTestes(TestCase):
         self.assertIs(noh, arvore.raiz)
 
     def teste_altura_arvore(self):
-        self.teste_altura_arvore(0, Arvore())
-        self.teste_altura_arvore(1, Arvore(Noh(1)))
+        self.assertEqual(0, Arvore().altura())
+        self.assertEqual(1, Arvore(Noh(1).altura()))
         arvore_binaria = self.gerar_arvore_binaria()
-        self.teste_altura_arvore(4, arvore_binaria.altura())
+        self.assertEqual(4, arvore_binaria.altura())
 
     def test_travesia_em_profundidade(self):
         travessia_arvore_vazia = [i for i in Arvore()]
