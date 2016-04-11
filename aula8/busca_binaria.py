@@ -6,7 +6,18 @@ def busca_binaria(seq, procurado):
 
     :return: int
     """
-    pass
+    n = len(seq)
+    if n == 0:
+        return 0
+
+    meio_indice = n // 2
+
+    meio = seq[meio_indice]
+
+    if procurado<= meio:
+        return busca_binaria(seq[:meio_indice], procurado)
+    else:
+        return meio_indice+1+busca_binaria(seq[meio_indice+1:], procurado)
 
 
 import unittest
