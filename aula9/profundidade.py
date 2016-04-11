@@ -75,7 +75,7 @@ class ArvoreTestes(TestCase):
 
     def teste_altura_arvore(self):
         self.assertEqual(0, Arvore().altura())
-        self.assertEqual(1, Arvore(Noh(1).altura()))
+        self.assertEqual(1, Arvore(Noh(1)).altura())
         arvore_binaria = self.gerar_arvore_binaria()
         self.assertEqual(4, arvore_binaria.altura())
 
