@@ -83,7 +83,7 @@ class ArvoreTestes(TestCase):
         travessia_arvore_vazia = [i for i in Arvore()]
         self.assertListEqual([], travessia_arvore_vazia)
         travessia_arvore_unitaria = [i for i in Arvore(Noh(1))]
-        self.assertListEqual([], travessia_arvore_unitaria)
+        self.assertListEqual([1], travessia_arvore_unitaria)
         arvore_binaria = self.gerar_arvore_binaria()
         travessia_arvore_binaria = [i for i in arvore_binaria]
         self.assertListEqual(list(range(10)), travessia_arvore_binaria)
