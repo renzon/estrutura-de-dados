@@ -48,3 +48,48 @@ class NohTestes(TestCase):
         self.assertIs(filho2, filho.irmao_direito)
         self.assertIsNone(filho2.irmao_direito)
 
+
+class ArvoreTestes(TestCase):
+    def teste_init(self):
+        arvore = Arvore()
+        self.assertIsNone(arvore.raiz)
+
+    def teste_arvore_com_raiz(self):
+        noh = Noh(1)
+        arvore = Arvore(noh)
+        self.assertIs(noh, arvore.raiz)
+
+    def teste_altura_arvore(self):
+        self.teste_altura_arvore(0, Arvore())
+        self.teste_altura_arvore(1, Arvore(Noh(1)))
+        arvore_binaria = self.gerar_arvore_binaria()
+        self.teste_altura_arvore(4, arvore_binaria.altura())
+
+    def test_travesia_em_profundidade(self):
+        travessia_arvore_vazia = [i for i in Arvore()]
+        self.assertListEqual([], travessia_arvore_vazia)
+        travessia_arvore_unitaria = [i for i in Arvore(Noh(1))]
+        self.assertListEqual([], travessia_arvore_unitaria)
+        arvore_binaria = self.gerar_arvore_binaria()
+        travessia_arvore_binaria = [i for i in arvore_binaria]
+        self.assertListEqual(list(range(10)), travessia_arvore_binaria)
+
+    def gerar_arvore_binaria(self):
+        nohs = [Noh(i) for i in range(10)]
+        raiz = nohs[5]
+        raiz.adicionar(nohs[2])
+        raiz.adicionar(nohs[8])
+
+        nohs[2].adicionar(nohs[1])
+        nohs[2].adicionar(nohs[4])
+
+        nohs[1].adicionar(nohs[0])
+
+        nohs[4].adicionar(nohs[3])
+
+        nohs[8].adicionar(nohs[7])
+        nohs[8].adicionar(nohs[7])
+
+        nohs[7].adicionar(nohs[6])
+
+        return Arvore(raiz)
