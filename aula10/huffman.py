@@ -75,7 +75,7 @@ class NohTestes(TestCase):
     def teste_noh_init(self):
         noh = Noh(3)
         self.assertEqual(3, noh.peso)
-        self.assertIsNone(noh.equerdo)
+        self.assertIsNone(noh.esquerdo)
         self.assertIsNone(noh.direito)
 
 
