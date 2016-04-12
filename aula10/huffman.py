@@ -138,6 +138,6 @@ class TestesDeIntegracao(TestCase):
         self.assertEqual(arvore, gerar_arvore_de_huffman('aaaabbc'))
 
     def teste_codificar(self):
-        arvore = gerar_arvore_de_huffman('aaaabbcc')
+        arvore = gerar_arvore_de_huffman('aaaabbc')
         self.assertEqual('0000101011', codificar(arvore.cod_dict(), 'aaaabbc'))
         self.assertEqual('aaaabbc', arvore.decodificar('0000101011'))
