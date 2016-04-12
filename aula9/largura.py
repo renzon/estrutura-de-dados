@@ -33,7 +33,6 @@ class NohTestes(TestCase):
         filho = Noh(4)
         pai.adicionar(filho)
         self.assertIs(pai, filho.pai)
-        self.assertIs(filho, pai.filho_esquerdo)
         self.assertIs(filho, pai.filhos[0])
 
     def teste_adicionar_dois_filhos(self):
