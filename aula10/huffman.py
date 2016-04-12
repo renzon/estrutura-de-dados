@@ -92,11 +92,11 @@ def _gerar_arvore_aaaa_bb_c():
 
 
 class ArvoreTestes(TestCase):
-    def teste_init(self):
+    def teste_init_com_defaults(self):
         arvore = Arvore()
         self.assertIsNone(arvore.raiz)
 
-    def teste_init(self):
+    def teste_init_sem_defaults(self):
         arvore = Arvore('a', 3)
         self.assertEqual(Folha('a', 3), arvore.raiz)
 
