@@ -135,9 +135,9 @@ class ArvoreTestes(TestCase):
 class TestesDeIntegracao(TestCase):
     def teste_gerar_arvore_de_huffman(self):
         arvore = _gerar_arvore_aaaa_bb_c()
-        self.assertEqual(arvore, gerar_arvore_de_huffman('aaaabbcc'))
+        self.assertEqual(arvore, gerar_arvore_de_huffman('aaaabbc'))
 
     def teste_codificar(self):
         arvore = gerar_arvore_de_huffman('aaaabbcc')
-        self.assertEqual('0000101011', codificar(arvore.cod_dict(), 'aaaabbcc'))
+        self.assertEqual('0000101011', codificar(arvore.cod_dict(), 'aaaabbc'))
         self.assertEqual('aaaabbc', arvore.decodificar('0000101011'))
