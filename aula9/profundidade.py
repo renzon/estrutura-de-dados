@@ -86,7 +86,9 @@ class ArvoreTestes(TestCase):
         self.assertListEqual([1], travessia_arvore_unitaria)
         arvore_binaria = self.gerar_arvore_binaria()
         travessia_arvore_binaria = [i for i in arvore_binaria]
-        self.assertListEqual([0, 1, 3, 4, 2, 6, 7, 9, 8, 5], travessia_arvore_binaria)
+        pos_ordem = [0, 1, 3, 4, 2, 6, 7, 9, 8, 5]
+        pre_ordem = [5, 2, 1, 0, 4, 3, 8, 7, 6, 9]
+        self.assertTrue(travessia_arvore_binaria == pos_ordem or travessia_arvore_binaria == pre_ordem)
 
     def gerar_arvore_binaria(self):
         nohs = [Noh(i) for i in range(10)]
