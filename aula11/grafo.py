@@ -108,22 +108,48 @@ class GrafoTestes(unittest.TestCase):
         self.assert_mesmo_elementos((sjc,), grafo.adjacencias(taubate))
         self.assert_mesmo_elementos((taubate, jacarei), grafo.adjacencias(sjc))
 
-    def teste_caminho(self):
+    def teste_caminho_para_proprio_vertice(self):
         grafo = Grafo()
         grafo.adicionar_vertice(sjc)
-        self.assert_mesmo_elementos(tuple(), grafo.arcos(sjc))
+        self.assertListEqual([sjc], grafo.caminho(sjc, sjc))
+
+    def teste_caminho_vertices_desconexos(self):
+        grafo = Grafo()
+        grafo.adicionar_vertice(sjc)
         grafo.adicionar_vertice(jacarei)
         self.assertListEqual([], grafo.caminho(sjc, jacarei))
+
+    def teste_caminho_dois_vertices_conexos(self):
+        grafo = Grafo()
+        grafo.adicionar_vertice(sjc)
+        grafo.adicionar_vertice(jacarei)
         grafo.adicionar_arco(arco_scj_jaca)
         self.assertListEqual([sjc, jacarei], grafo.caminho(sjc, jacarei))
-        grafo.adicionar_vertice(taubate)
-        self.assertListEqual([], grafo.caminho(taubate, jacarei))
 
+    def teste_caminho_tres_vertices_conexos(self):
+        grafo = Grafo()
+        grafo.adicionar_vertice(sjc)
+        grafo.adicionar_vertice(jacarei)
+        grafo.adicionar_vertice(taubate)
         grafo.adicionar_arco(arco_scj_jaca)
+        grafo.adicionar_arco(arco_tauba_sjc)
+
         self.assertListEqual([taubate, sjc, jacarei], grafo.caminho(taubate, jacarei))
+        self.assertListEqual([taubate, sjc], grafo.caminho(taubate, sjc))
+
+    def teste_caminho_4_vertices_conexos_nao_lineares(self):
+        grafo = Grafo()
+        grafo.adicionar_vertice(sjc)
+        grafo.adicionar_vertice(jacarei)
+        grafo.adicionar_vertice(mogi)
         grafo.adicionar_vertice(sao_paulo)
+        grafo.adicionar_arco(arco_scj_jaca)
         grafo.adicionar_arco(arco_jaca_sp)
-        self.assertListEqual([taubate, sjc, jacarei, sao_paulo], grafo.caminho(taubate, jacarei))
+        grafo.adicionar_arco(arco_mogi_jaca)
+        grafo.adicionar_arco(arco_mogi_sp)
+
+        caminho = grafo.caminho(sjc, sao_paulo)
+        self.assertTrue([sjc, jacarei, sao_paulo] == caminho or [sjc, jacarei, mogi, sao_paulo] == caminho)
 
     def assert_mesmo_elementos(self, iteravel, outro_iteravel):
         "Método auxiliar para asserção de elementos"
