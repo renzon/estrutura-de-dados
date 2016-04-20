@@ -9,6 +9,9 @@ class Arco():
     def __eq__(self, arco):
         return (self.valor,) + self.vertices == (arco.valor,) + arco.vertices
 
+    def __repr__(self):
+        return 'Arco({!r}, {!r}, {!r})'.format(self.vertices[0], self.vertices[1], self.valor)
+
 
 import unittest
 
