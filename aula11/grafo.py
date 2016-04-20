@@ -92,7 +92,7 @@ class GrafoTestes(unittest.TestCase):
         self.assert_mesmo_elementos((arco_scj_jaca,), grafo.arcos(jacarei))
         self.assert_mesmo_elementos((arco_scj_jaca,), grafo.arcos(sjc))
         grafo.adicionar_vertice(taubate)
-        grafo.adicionar_arco(arco_scj_jaca)
+        grafo.adicionar_arco(arco_tauba_sjc)
         self.assert_mesmo_elementos((arco_scj_jaca, arco_tauba_sjc), grafo.arcos(sjc))
         self.assert_mesmo_elementos((arco_tauba_sjc,), grafo.arcos(taubate))
 
