@@ -1,4 +1,8 @@
 class Arco():
+    def __init__(self, origem, destino, valor):
+        self.valor = valor
+        self.vertices = (origem, destino)
+
     def __hash__(self):
         return hash(self.vertices + (self.valor,))
 
@@ -13,7 +17,7 @@ class ArcoTestes(unittest.TestCase):
     def teste_init(self):
         arco = Arco('origem', 'destino', 1)
         self.assertTupleEqual(('origem', 'destino'), arco.vertices)
-        self.assertEqual('valor', arco.valor)
+        self.assertEqual(1, arco.valor)
 
     def teste_oposto(self):
         arco = Arco('origem', 'destino', 1)
