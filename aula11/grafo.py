@@ -194,6 +194,61 @@ class GrafoTestes(unittest.TestCase):
         self.assertEqual(211700, distancia)
         self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 81800, sao_paulo, 72800, santos], caminho)
 
+    def teste_melhor_caminho_partindo_de_taubate_considerando_custo(self):
+
+        for v in vertices_cidades:
+            grafo.adicionar_vertice(v)
+
+        preco_gasolina = 3.65  # R$/litro
+        rendimento_carro_popular = 15000  # metros/litro
+        preco_por_distancia = preco_gasolina / rendimento_carro_popular  # R$/metro
+        arcos_custo = [Arco(a.vertices[0], a.vertices[1], a.valor * preco_por_distancia)
+                       for a in arcos_distancias]
+
+        pedagios = {(jacarei, sao_paulo): 11.8, (jacarei, mogi): 6.1, (sao_paulo, santos): 23}
+
+        grafo = Grafo()
+        for a in arcos_custo:
+            vertices_contrarios = (a.vertices[1], a.vertices[0])
+            pedagio = pedagios.get(a.vertices, pedagios.get(vertices_contrarios, 0))
+            a.valor += pedagio
+            grafo.adicionar_arco(a)
+
+        dct = grafo.calcular_melhores_caminhos_partindo_de(taubate)
+        self.assert_mesmo_elementos(vertices_cidades, dct.keys())
+
+        distancia, caminho = dct[taubate]
+        self.assertEqual(0, distancia)
+        self.assertListEqual([taubate], caminho)
+
+        distancia, caminho = dct[sjc]
+        self.assertEqual(43900, distancia)
+        self.assertListEqual([taubate, 43900, sjc], caminho)
+
+        distancia, caminho = dct[jacarei]
+        self.assertEqual(57100, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei], caminho)
+
+        distancia, caminho = dct[mogi]
+        self.assertEqual(111400, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 54300, mogi], caminho)
+
+        distancia, caminho = dct[caragua]
+        self.assertEqual(130800, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 86900, caragua], caminho)
+
+        distancia, caminho = dct[sao_paulo]
+        self.assertEqual(138900, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 81800, sao_paulo], caminho)
+
+        distancia, caminho = dct[bertioga]
+        self.assertEqual(160100, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 54300, mogi, 48700, bertioga], caminho)
+
+        distancia, caminho = dct[santos]
+        self.assertEqual(211700, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 81800, sao_paulo, 72800, santos], caminho)
+
     def assert_mesmo_elementos(self, iteravel, outro_iteravel):
         "Método auxiliar para asserção de elementos"
         self.assertSetEqual(set(iteravel), set(outro_iteravel))
