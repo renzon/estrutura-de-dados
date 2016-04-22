@@ -151,6 +151,49 @@ class GrafoTestes(unittest.TestCase):
         caminho = grafo.caminho(sjc, sao_paulo)
         self.assertTrue([sjc, jacarei, sao_paulo] == caminho or [sjc, jacarei, mogi, sao_paulo] == caminho)
 
+    def teste_melhor_caminho_partindo_de_taubate_considerando_distancias(self):
+        grafo = Grafo()
+        for v in vertices_cidades:
+            grafo.adicionar_vertice(v)
+
+        for a in arcos_distancias:
+            grafo.adicionar_arco(a)
+
+        dct = grafo.calcular_melhores_caminhos_partindo_de(taubate)
+        self.assertSetEqual(set(vertices_cidades), dct.keys())
+
+        distancia, caminho = dct[taubate]
+        self.assertEqual(0, distancia)
+        self.assertListEqual([taubate], caminho)
+
+        distancia, caminho = dct[sjc]
+        self.assertEqual(43900, distancia)
+        self.assertListEqual([taubate, 43900, sjc], caminho)
+
+        distancia, caminho = dct[jacarei]
+        self.assertEqual(57100, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei], caminho)
+
+        distancia, caminho = dct[mogi]
+        self.assertEqual(111, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 54300, mogi], caminho)
+
+        distancia, caminho = dct[caragua]
+        self.assertEqual(130800, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 86900, caragua], caminho)
+
+        distancia, caminho = dct[sao_paulo]
+        self.assertEqual(138900, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 81800, sao_paulo], caminho)
+
+        distancia, caminho = dct[bertioga]
+        self.assertEqual(160100, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 54300, mogi, 48700, bertioga], caminho)
+
+        distancia, caminho = dct[santos]
+        self.assertEqual(211700, distancia)
+        self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 81800, sao_paulo, 72800, santos], caminho)
+
     def assert_mesmo_elementos(self, iteravel, outro_iteravel):
         "Método auxiliar para asserção de elementos"
         self.assertSetEqual(set(iteravel), set(outro_iteravel))
