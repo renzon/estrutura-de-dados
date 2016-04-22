@@ -175,7 +175,7 @@ class GrafoTestes(unittest.TestCase):
         self.assertListEqual([taubate, 43900, sjc, 13200, jacarei], caminho)
 
         distancia, caminho = dct[mogi]
-        self.assertEqual(111, distancia)
+        self.assertEqual(111400, distancia)
         self.assertListEqual([taubate, 43900, sjc, 13200, jacarei, 54300, mogi], caminho)
 
         distancia, caminho = dct[caragua]
