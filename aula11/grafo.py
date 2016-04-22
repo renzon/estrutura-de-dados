@@ -160,7 +160,7 @@ class GrafoTestes(unittest.TestCase):
             grafo.adicionar_arco(a)
 
         dct = grafo.calcular_melhores_caminhos_partindo_de(taubate)
-        self.assertSetEqual(set(vertices_cidades), dct.keys())
+        self.assert_mesmo_elementos(vertices_cidades, dct.keys())
 
         distancia, caminho = dct[taubate]
         self.assertEqual(0, distancia)
