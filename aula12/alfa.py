@@ -31,4 +31,4 @@ class Testes(unittest.TestCase):
     def testes_com_5_numeros(self):
         resultado = set(gerar_alfa('73696'))
         self.assertIn(tuple('renzo'), resultado)
-        self.assertSetEqual(list(product('pqrs', 'def', 'mno', 'wzyz', 'mno')), resultado)
+        self.assertSetEqual(set(product('pqrs', 'def', 'mno', 'wzyz', 'mno')), resultado)
