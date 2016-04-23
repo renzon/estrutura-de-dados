@@ -16,7 +16,7 @@ def gerar_alfa(s):
 
 class Testes(unittest.TestCase):
     def testes_string_vazia(self):
-        self.assertListEqual([], list(gerar_alfa('')))
+        self.assertListEqual([tuple()], list(gerar_alfa('')))
 
     def testes_string_2(self):
         self.assertListEqual([('a',), ('b',), ('c',)], list(gerar_alfa('2')))
