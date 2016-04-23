@@ -16,7 +16,7 @@ def gerar_alfa(s):
 
 class Testes(unittest.TestCase):
     def testes_string_vazia(self):
-        self.assertListEqual([], gerar_alfa(''))
+        self.assertListEqual([], list(gerar_alfa('')))
 
     def testes_string_2(self):
         self.assertListEqual([('a',), ('b',), ('c',)], list(gerar_alfa('2')))
@@ -26,7 +26,7 @@ class Testes(unittest.TestCase):
 
     def testes_string_com_2_numeros(self):
         self.assertSetEqual(set((('a', 'd'), ('a', 'e'), ('a', 'f'), ('b', 'd'), ('b', 'e'), ('b', 'f'), ('c', 'd'),
-                                 ('c', 'e'), ('c', 'f'))), set(gerar_alfa('3')))
+                                 ('c', 'e'), ('c', 'f'))), set(gerar_alfa('23')))
 
     def testes_com_5_numeros(self):
         resultado = set(gerar_alfa('73696'))
