@@ -1,3 +1,6 @@
+from collections import Counter
+
+
 def soma_quadrados(n):
     pass
 
@@ -31,4 +34,4 @@ class SomaQuadradosPerfeitosTestes(unittest.TestCase):
         self.assert_possui_mesmo_elementos([4, 4, 4], soma_quadrados(12))
 
     def assert_possui_mesmo_elementos(self, esperado, resultado):
-        self.assertSetEqual(set(esperado), set(resultado))
+        self.assertEqual(Counter(esperado), Counter(resultado))
