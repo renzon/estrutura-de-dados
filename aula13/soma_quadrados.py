@@ -16,10 +16,10 @@ class SomaQuadradosPerfeitosTestes(unittest.TestCase):
         self.assert_possui_mesmo_elementos([1], soma_quadrados(1))
 
     def teste_2(self):
-        self.assert_possui_mesmo_elementos([1, 1], soma_quadrados(0))
+        self.assert_possui_mesmo_elementos([1, 1], soma_quadrados(2))
 
     def teste_3(self):
-        self.assert_possui_mesmo_elementos([1, 1, 1], soma_quadrados(0))
+        self.assert_possui_mesmo_elementos([1, 1, 1], soma_quadrados(3))
 
     def teste_4(self):
         self.assert_possui_mesmo_elementos([4], soma_quadrados(4))
