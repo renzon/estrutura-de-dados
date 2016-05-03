@@ -1,18 +1,18 @@
 import time
+from functools import lru_cache
 
 cont = 0
 
-cache = [0, 1]
 
-
+@lru_cache(maxsize=128)
 def fib(n):
     global cont
     cont += 1
-    if n < len(cache):
-        return cache[n]
-    resultado = fib(n - 1) + fib(n - 2)
-    cache.append(resultado)
-    return resultado
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fib(n - 1) + fib(n - 2)
 
 
 for i in range(40):
